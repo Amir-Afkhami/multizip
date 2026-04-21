@@ -3,7 +3,7 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++17 -Iinclude
 
 # Directories
-SRC_DIR = source
+SRC_DIR = src
 BUILD_DIR = build
 
 # Files
