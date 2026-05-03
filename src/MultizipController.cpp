@@ -1,13 +1,13 @@
 #include <MultizipController.h>
 
 bool
-MultizipController::compress (std::string path)
+MultizipController::compress (Input input)
 {
-  return false;
+  return true;
 }
 
 bool
-MultizipController::extract (std::string path)
+MultizipController::extract (Input input)
 {
-  return false;
+  return true;
 }
