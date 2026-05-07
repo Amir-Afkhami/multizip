@@ -9,34 +9,35 @@ FSController& FSController::getInstance() {
     return instance;
 }
 
-std::string FSController::readFile(const std::string& path) {
+std::ifstream FSController::readFile(const std::string& path) {
     std::ifstream file(path);
     if (!file.is_open()) {
         throw std::runtime_error("Cannot open file: " + path);
     }
-    std::stringstream buffer;
-    buffer << file.rdbuf();
-    return buffer.str();
+    return file;
 }
 
 std::vector<std::string> FSController::readDir(const std::string& path) {
     std::vector<std::string> entries;
-    for (const auto& entry : std::filesystem::directory_iterator(path)) {
-        entries.push_back(entry.path().filename().string());
+
+    for (const auto& entry : std::filesystem::recursive_directory_iterator(path)) {
+        if(entry.is_regular_file())
+        {
+            entries.push_back(entry.path().string());
+        }
     }
     return entries;
 }
 
-void FSController::writeFile(const std::string& path, const std::string& content) {
+void FSController::writeFile(const std::string& path, std::stringstream& content) {
     std::ofstream file(path);
+
     if (!file.is_open()) {
         throw std::runtime_error("Cannot create file: " + path);
     }
-    file << content;
+    file << content.rdbuf();
 }
 
-void FSController::makeDir(const std::string& path) {
-    if (!std::filesystem::create_directories(path)) {
-        throw std::runtime_error("Cannot create directory: " + path);
-    }
+bool FSController::makeDir(const std::string& path) {
+    return std::filesystem::create_directories(path);
 }
