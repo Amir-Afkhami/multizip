@@ -9,7 +9,7 @@ public:
     
     std::ifstream readFile(const std::string& path);
     std::vector<std::string> readDir(const std::string& path);
-    void writeFile(const std::string& path, std::stringstream& content);
+    std::ofstream writeFile(const std::string& path);
     bool makeDir(const std::string& path);
     
     // Delete copy constructor and assignment operator

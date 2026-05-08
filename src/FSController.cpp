@@ -29,13 +29,13 @@ std::vector<std::string> FSController::readDir(const std::string& path) {
     return entries;
 }
 
-void FSController::writeFile(const std::string& path, std::stringstream& content) {
+std::ofstream FSController::writeFile(const std::string& path) {
     std::ofstream file(path);
 
     if (!file.is_open()) {
         throw std::runtime_error("Cannot create file: " + path);
     }
-    file << content.rdbuf();
+    return file;
 }
 
 bool FSController::makeDir(const std::string& path) {
