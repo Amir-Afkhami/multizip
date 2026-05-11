@@ -1,11 +1,12 @@
 #pragma once
 
 #include <string>
+#include <BoundedStream.h>
 
 class Algorithm {
 public:
     virtual ~Algorithm() = default;
     
-    virtual std::string encode(std::string s) = 0;
-    virtual std::string decode(std::string s) = 0;
+    virtual void encode(std::ifstream& file, std::ofstream& out) = 0;
+    virtual void decode(BoundedStream& in, std::ofstream& file) = 0;
 };
