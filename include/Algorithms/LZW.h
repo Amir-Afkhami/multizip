@@ -1,12 +1,12 @@
 #pragma once
 
-#include <Algorithm.h>
 #include <string>
+#include <Algorithm.h>
 
 class LZW : public Algorithm {
 public:
     virtual ~LZW() = default;
     
-    virtual std::string encode(std::string s) override;
-    virtual std::string decode(std::string s) override;
+    virtual void encode(std::ifstream& file, std::ofstream& out) override;
+    virtual void decode(BoundedStream& in, std::ofstream& file) override;
 };
