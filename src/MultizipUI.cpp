@@ -47,7 +47,13 @@ MultizipUI::init (int argc, char* argv[])
         }
         else
         {
-            switch(args.at(i).c_str()[1])
+            const std::string& arg = args.at(i);
+            if (arg == "-lzw") {
+                input.options.push_back("lzw");
+                continue;
+            }
+
+            switch (arg.c_str()[1])
             {
                 case 'h':
                     this->printHelp();
@@ -111,7 +117,10 @@ MultizipUI::printHelp ()
               << "  -o <path>         Specify output file path\n"
               << "  -c                Compress files (default)\n"
               << "  -u                Extract/uncompress files\n"
+              << "  -lzw              Use LZW compression (default: store)\n"
               << "\nExamples:\n"
               << "  multizip input.txt output.zip -c\n"
-              << "  multizip -i archive.zip -o extracted -u\n";
+              << "  multizip input.txt output.zip -c -lzw\n"
+              << "  multizip -i archive.zip -o extracted -u\n"
+              << "  multizip -i archive.zip -o extracted -u -lzw\n";
 }
