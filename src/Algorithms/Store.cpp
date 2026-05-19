@@ -1,13 +1,13 @@
-#include <Algorithms/LZW.h>
+#include <Algorithms/Store.h>
 
 void
-LZW::encode(std::istream& file, std::ostream& out)
+Store::encode(std::istream& file, std::ostream& out)
 {
     out << file.rdbuf();
 }
 
 void
-LZW::decode(BoundedStream& in, std::ostream& file)
+Store::decode(BoundedStream& in, std::ostream& file)
 {
     char buffer[4096];
     while (!in.reached_limit()) {
