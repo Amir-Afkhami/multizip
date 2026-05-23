@@ -6,6 +6,7 @@
 #include <FSController.h>
 #include <FileHandler.h>
 #include <FileHandlers/ZipFileHandler.h>
+#include <FileHandlers/TarFileHandler.h>
 #include <Algorithm.h>
 #include <Algorithms/LZW.h>
 #include <Algorithms/Store.h>
@@ -32,6 +33,8 @@ createFileHandler(std::ostream& out, const Input& input)
 {
     if (hasExtension(input.outputPath, ".zip"))
         return std::make_unique<ZipFileHandler>(out, createAlgorithm(input));
+    if (hasExtension(input.outputPath, ".tar"))
+        return std::make_unique<TarFileHandler>(out, createAlgorithm(input));
 
     return nullptr;
 }
@@ -41,6 +44,8 @@ createFileHandler(std::istream& in, const Input& input)
 {
     if (hasExtension(input.inputPath, ".zip"))
         return std::make_unique<ZipFileHandler>(in, createAlgorithm(input));
+    if (hasExtension(input.inputPath, ".tar"))
+        return std::make_unique<TarFileHandler>(in, createAlgorithm(input));
 
     return nullptr;
 }
